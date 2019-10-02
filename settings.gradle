@@ -1,0 +1,2 @@
+include ':app', ':bubblenavigation'
+rootProject.name='Booze'
