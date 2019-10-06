@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="layout_border">
+        <item name="android:background">@drawable/layout_border</item>
+    </style>
+
+    <style name="borderrightradius">
+        <item name="android:background">@drawable/borderrightradius</item>
+    </style>
+
+    <style name="borderleftradius">
+        <item name="android:background">@drawable/borderleftradius</item>
+    </style>
 </resources>
