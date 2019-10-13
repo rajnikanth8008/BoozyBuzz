@@ -6,18 +6,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.List;
+
 public class HomeProductsAdapter extends BaseAdapter {
-    Integer[] mThumbIds;
+    List<ProductCategoryDO> productCategoryDOList;
     Activity activity;
 
-    public HomeProductsAdapter(Activity activity, Integer[] mThumbIds) {
+    public HomeProductsAdapter(Activity activity, List<ProductCategoryDO> productCategoryDOList) {
         this.activity = activity;
-        this.mThumbIds = mThumbIds;
+        this.productCategoryDOList = productCategoryDOList;
     }
 
     @Override
     public int getCount() {
-        return mThumbIds.length;
+        return productCategoryDOList.size();
     }
 
     @Override
@@ -35,7 +37,7 @@ public class HomeProductsAdapter extends BaseAdapter {
         View view = convertView;
         view = activity.getLayoutInflater().inflate(R.layout.home_product_view, null, true);
         ImageView imageView = view.findViewById(R.id.imv_image);
-        imageView.setImageResource(mThumbIds[i]);
+        imageView.setImageResource(productCategoryDOList.get(i).getCategoryPreviewId());
         return view;
     }
 }

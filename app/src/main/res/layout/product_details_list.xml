@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    tools:context=".ProductDetailsList"
+    android:padding="@dimen/_5sdp">
 
-    <!--Layout for your Edittext-->
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="8dp">
+        app:layout_constraintBottom_toTopOf="@+id/rcv_product_details_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="@dimen/_5sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tv_product_details_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="search related to"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_thin"
+                android:padding="@dimen/_5sdp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -35,7 +48,7 @@
                     android:src="@drawable/magnify_hint_white_24" />
 
                 <EditText
-                    android:id="@+id/filter"
+                    android:id="@+id/et_product_details_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/search_icon"
@@ -44,18 +57,18 @@
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black"
                     android:hint="Search"
-                    android:textCursorDrawable="@android:color/holo_purple"/>
+                    android:textCursorDrawable="@android:color/holo_purple" />
 
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <!--RecyclerView-->
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/_5sdp">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-</LinearLayout>
+        android:id="@+id/rcv_product_details_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,8 +15,8 @@ import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager viewPager;
-    BubbleNavigationLinearView bubbleNavigationLinearView;
+    public static ViewPager viewPager;
+    public static BubbleNavigationLinearView bubbleNavigationLinearView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +25,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         bubbleNavigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
         bubbleNavigationLinearView.setTypeface(ResourcesCompat.getFont(this, R.font.baloo));
-//        bubbleNavigationLinearView.setBadgeValue(0, null);
-//        bubbleNavigationLinearView.setBadgeValue(1, null);
         bubbleNavigationLinearView.setBadgeValue(2, "3");
 
-        viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new HomePageAdapter(MainActivity.this,getSupportFragmentManager(), "All"));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -38,42 +36,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-
+                bubbleNavigationLinearView.setCurrentActiveItem(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                bubbleNavigationLinearView.setBadgeValue(2, "3");
-                bubbleNavigationLinearView.setCurrentActiveItem(state);
             }
         });
         bubbleNavigationLinearView.setNavigationChangeListener(new BubbleNavigationChangeListener() {
             @Override
             public void onNavigationChanged(View view, int position) {
-                viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
                 viewPager.setCurrentItem(position, true);
             }
         });
-    }
-
-    private class MyPagerAdapter extends FragmentPagerAdapter {
-
-        public MyPagerAdapter(@NonNull FragmentManager fm) {
-            super(fm);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                default:
-                    return new HomeFragment(MainActivity.this);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 5;
-        }
     }
 }

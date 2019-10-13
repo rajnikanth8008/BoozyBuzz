@@ -5,36 +5,38 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     Activity activity;
-    public Integer[] mThumbIds = {
-            R.drawable.whitewine, R.drawable.redwine,
-            R.drawable.champagne, R.drawable.vermouth,
-            R.drawable.rum, R.drawable.whiskey,
-            R.drawable.tequila, R.drawable.cognac,
-            R.drawable.vodka, R.drawable.gin,
-            R.drawable.liqueur, R.drawable.beer,
-    };
+    FragmentManager supportFragmentManager;
 
-    public HomeFragment(Activity activity) {
-        // Required empty public constructor
-        this.activity = activity;
-    }
+//    public HomeFragment(MainActivity activity, FragmentManager supportFragmentManager) {
+//        this.activity = activity;
+//        this.supportFragmentManager = supportFragmentManager;
+//    }
 
     public HomeFragment() {
 
+    }
+
+    public HomeFragment(Activity activity, FragmentManager supportFragmentManager) {
+        this.activity = activity;
+        this.supportFragmentManager = supportFragmentManager;
     }
 
     /**
@@ -70,7 +72,36 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         GridView gridview = view.findViewById(R.id.gridview);
-        gridview.setAdapter(new HomeProductsAdapter(activity, mThumbIds));
+        gridview.setAdapter(new HomeProductsAdapter(activity, productCategoryDOList()));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long result) {
+//                MainActivity.viewPager.setAdapter(new HomePageAdapter(activity, supportFragmentManager,"test"));
+                MainActivity.viewPager.setCurrentItem(1, true);
+                MainActivity.bubbleNavigationLinearView.setCurrentActiveItem(1);
+            }
+        });
         return view;
+    }
+
+    private List<ProductCategoryDO> productCategoryDOList() {
+        List<ProductCategoryDO> productCategoryDOList = new ArrayList<>();
+        try {
+            productCategoryDOList.add(new ProductCategoryDO("WW01", "WHITEWINE", R.drawable.whitewine));
+            productCategoryDOList.add(new ProductCategoryDO("RW02", "REDWINE", R.drawable.redwine));
+            productCategoryDOList.add(new ProductCategoryDO("CP03", "CHAMPAGNE", R.drawable.champagne));
+            productCategoryDOList.add(new ProductCategoryDO("VM04", "VERMOUTH", R.drawable.vermouth));
+            productCategoryDOList.add(new ProductCategoryDO("RM05", "RUM", R.drawable.rum));
+            productCategoryDOList.add(new ProductCategoryDO("WS06", "WHISKEY", R.drawable.whiskey));
+            productCategoryDOList.add(new ProductCategoryDO("TQ07", "TEQUILA", R.drawable.tequila));
+            productCategoryDOList.add(new ProductCategoryDO("CG08", "COGNAC", R.drawable.cognac));
+            productCategoryDOList.add(new ProductCategoryDO("VD09", "VODKA", R.drawable.vodka));
+            productCategoryDOList.add(new ProductCategoryDO("GN10", "GIN", R.drawable.gin));
+            productCategoryDOList.add(new ProductCategoryDO("LQ11", "LIQUEUR", R.drawable.liqueur));
+            productCategoryDOList.add(new ProductCategoryDO("BR12", "BEER", R.drawable.beer));
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return productCategoryDOList;
     }
 }
